@@ -1,0 +1,183 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JB Curioso Plus</title>
+    <meta name="description" content="Sua plataforma de vídeos exclusiva.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <meta name="theme-color" content="#000000"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <button id="menu-toggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>JB Curioso Plus</h3>
+            <button id="close-menu" class="close-menu"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Início</a></li>
+            <li><a href="#videos" class="nav-link"><i class="fas fa-video"></i> Vídeos</a></li>
+            <li><a href="#movies" class="nav-link"><i class="fas fa-film"></i> Filmes</a></li>
+            <li><a href="#series" class="nav-link"><i class="fas fa-tv"></i> Séries</a></li>
+            <li><a href="#watched" class="nav-link"><i class="fas fa-history"></i> Já assistidos</a></li>
+            <li><a href="#import" class="nav-link"><i class="fas fa-upload"></i> Importar Dados</a></li>
+            <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> Sobre</a></li>
+            <li><a href="#admin" class="nav-link"><i class="fas fa-user-shield"></i> Admin</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <section id="home" class="page active">
+            <div class="hero">
+                <img src="logo.png" alt="JB Curioso Plus Logo" class="hero-logo">
+                <h2>Seu conteúdo exclusivo, em um só lugar.</h2>
+            </div>
+            <div class="content-section">
+                <h3>Filmes em Destaque</h3>
+                <div id="home-movies" class="video-grid"></div>
+            </div>
+             <div class="content-section">
+                <h3>Vídeos Recentes</h3>
+                <div id="home-videos" class="video-grid"></div>
+            </div>
+        </section>
+
+        <section id="videos" class="page">
+            <h2>Vídeos</h2>
+            <div id="videos-grid" class="video-grid"></div>
+        </section>
+
+        <section id="movies" class="page">
+            <h2>Filmes</h2>
+            <div id="movies-grid" class="video-grid"></div>
+        </section>
+
+        <section id="series" class="page">
+            <h2>Séries</h2>
+            <div id="series-grid" class="video-grid series-grid"></div>
+        </section>
+
+        <section id="series-detail" class="page">
+            <button class="back-button"><i class="fas fa-arrow-left"></i> Voltar</button>
+            <div id="series-detail-header">
+                <img id="series-detail-cover" src="" alt="Capa da Série">
+                <div id="series-detail-info">
+                    <h2 id="series-detail-title"></h2>
+                    <p id="series-detail-subtitle"></p>
+                </div>
+            </div>
+            
+            <div id="seasons-tabs-container"></div>
+            <h3>Episódios</h3>
+            <div id="episodes-grid" class="video-grid"></div>
+        </section>
+
+        <section id="watched" class="page">
+            <h2>Já assistidos</h2>
+            <div id="watched-grid" class="video-grid"></div>
+        </section>
+
+        <section id="import" class="page">
+            <h2>Importar Dados</h2>
+            <div class="import-content">
+                <p>Use esta função para carregar um arquivo de backup (.json) e restaurar ou substituir todo o conteúdo do aplicativo. Esta ação não pode ser desfeita.</p>
+                <label for="import-data-main" class="btn">
+                    <i class="fas fa-file-import"></i> Selecionar Arquivo para Importar
+                </label>
+                <input type="file" id="import-data-main" accept=".json" style="display: none;">
+            </div>
+        </section>
+
+        <section id="about" class="page">
+            <h2>Sobre o JB Curioso Plus</h2>
+            <div class="about-content">
+                <img src="icon-192x192.png" alt="JB Curioso Icon" class="about-icon">
+                <p>Este aplicativo foi criado exclusivamente para membros do canal JB Curioso no YouTube. Aqui você terá acesso a vídeos exclusivos, conteúdos especiais e séries feitas especialmente para quem apoia o canal. Obrigado por fazer parte dessa comunidade!</p>
+            </div>
+        </section>
+
+        <section id="admin" class="page">
+            <h2>Painel de Administração</h2>
+
+            <div id="admin-login-container">
+                <h3>Acesso Restrito</h3>
+                <form id="login-form">
+                    <input type="password" id="admin-password" placeholder="Digite a senha" required>
+                    <button type="submit" class="btn">Entrar</button>
+                    <p id="login-error" style="color: var(--danger-color); display: none; margin-top: 1rem;">Senha incorreta.</p>
+                </form>
+            </div>
+            
+            <div id="admin-content-container" style="display: none;">
+                <div class="admin-section">
+                    <label for="manage-content-toggle" class="btn" style="display: none;">
+                        <input type="checkbox" id="manage-content-toggle" style="vertical-align: middle; margin-right: 8px;"> Gerenciar Conteúdo
+                    </label>
+                </div>
+    
+                <div class="admin-form-container">
+                    <h3>Adicionar Novo Conteúdo</h3>
+                    <form id="add-content-form">
+                        <select id="content-type" name="content-type" required>
+                            <option value="video">Vídeo Comum</option>
+                            <option value="movie">Filme</option>
+                            <option value="series">Nova Série</option>
+                             <option value="episode">Novo Episódio (em série existente)</option>
+                        </select>
+                        
+                        <div id="series-selection-container" style="display: none;">
+                             <label for="existing-series">Selecione a Série</label>
+                             <select id="existing-series" name="existing-series"></select>
+                        </div>
+                        
+                        <div id="season-selection-container" style="display: none;">
+                            <label for="season-number">Número da Temporada</label>
+                            <input type="number" id="season-number" name="season-number" min="1" value="1" placeholder="Número da Temporada" required>
+                        </div>
+    
+                        <input type="text" id="content-title" placeholder="Título" required>
+                        <input type="text" id="content-subtitle" placeholder="Subtítulo/Descrição" required>
+                        <input type="text" id="content-url" placeholder="URL do Vídeo, Youtube ou código <iframe>">
+                        <label for="content-file" class="btn" style="text-align: center; margin-top: 1rem;">Ou envie um arquivo de vídeo</label>
+                        <input type="file" id="content-file" accept="video/mp4,video/webm" style="display: none;">
+                        <span id="file-upload-status" style="text-align: center; color: var(--primary-color); margin-top: -0.5rem; display: none;"></span>
+                        <input type="url" id="content-cover" placeholder="URL da Imagem de Capa" required>
+                        
+                        <button type="submit" class="btn">Adicionar Conteúdo</button>
+                    </form>
+                </div>
+    
+                <div class="admin-section">
+                    <h3>Excluir Conteúdo</h3>
+                    <p class="delete-instructions">Clique em um item da lista para revelar a opção de exclusão.</p>
+                    <div id="delete-content-list" class="delete-list">
+                        <!-- Gerado via JS -->
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                     <button id="export-data" class="btn">Exportar Dados</button>
+                     <button id="reset-data" class="btn danger">Resetar para Padrão</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="video-player-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="player-container"></div>
+            <div class="player-info">
+                 <h2 id="player-title"></h2>
+                 <p id="player-description"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
